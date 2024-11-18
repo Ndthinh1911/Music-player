@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="player">
+      <!--nav-bar-->
+      <div class="dashboard">
+        <div class="nav-bar">
+          <div class="btn btn-back">
+            <i class="fa-solid fa-chevron-left"></i>
+          </div>
+          <h3 class="header-title">Playlist</h3>
+          <div class="btn btn-option">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+          <div class="btn btn-close">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+        </div>
+        <!--cd-->
+        <div class="cd">
+          <div class="cd-thumb" style="background-image: url('')"></div>
+        </div>
+        <!--nar-bar2-->
+        <div class="nav-bar-2">
+          <div class="btn btn-share">
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+          <div class="song-title">
+            <h3 class="title">Havana</h3>
+            <p class="author">Camila Cabello ft, Young Thug</p>
+          </div>
+          <div class="btn btn-loved-list">
+            <i class="fa-regular fa-heart"></i>
+          </div>
+        </div>
+        <!--control-->
+        <div class="progress-control">
+          <input
+            type="range"
+            id="progress"
+            class="progress"
+            value="0"
+            step="1"
+            min="0"
+            max="100"
+          />
+          <audio src="" id="audio"></audio>
+        </div>
+        <!--control-btn-->
+        <div class="control-btn">
+          <div class="btn random-btn">
+            <i class="fa-solid fa-shuffle"></i>
+          </div>
+          <div class="btn prev-btn">
+            <i class="fa-solid fa-backward"></i>
+          </div>
+          <div class="btn toggle-btn">
+            <i class="fa-solid fa-play play-btn"></i>
+
+            <i class="fa-solid fa-pause pause-btn"></i>
+          </div>
+          <div class="btn next-btn">
+            <i class="fa-solid fa-forward"></i>
+          </div>
+          <div class="btn repeat-btn">
+            <i class="fa-solid fa-repeat"></i>
+          </div>
+        </div>
+      </div>
+      <!--playlist-->
+      <div class="playlist"></div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
