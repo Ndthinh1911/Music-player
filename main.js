@@ -27,6 +27,10 @@ const nextBtn = $(".next-btn");
 const prevBtn = $(".prev-btn");
 const randomBtn = $(".random-btn");
 const repeatBtn = $(".repeat-btn");
+const optionBtn = $(".btn-option");
+const closeBtn = $(".btn-close");
+const optionBar = $(".option-bar");
+const loveIcon = $(".btn-loved-list-icon");
 
 let listenedSongs = [];
 const app = {
@@ -84,10 +88,13 @@ const app = {
       image: "./assets/thumb/song8.jpg",
     },
   ],
+  lovedList: [],
   render: function () {
     const html = this.songs.map((song, index) => {
       return `
-            <div class="song">
+            <div class="song ${
+              index === this.currentIndex ? `active` : ``
+            }" data-index="${index}">
           <div
             class="thumb"
             style="background-image: url('${song.image}')"
@@ -97,13 +104,14 @@ const app = {
             <p class="author">${song.singer}</p>
           </div>
           <div class="option">
-            <i class="fa-regular fa-heart loved-list"></i>
+            <i class="fa-regular fa-heart btn-loved-list-icon"></i>
           </div>
         </div>
         `;
     });
     playlist.innerHTML = html.join("");
   },
+  renderLovedList: function () {},
   defineProperties: function () {
     Object.defineProperty(this, "currentSong", {
       get: function () {
@@ -169,6 +177,7 @@ const app = {
         _this.nextSong();
       }
       _this.render();
+      _this.scrollIntoView();
       audio.play();
     };
 
@@ -179,6 +188,7 @@ const app = {
         _this.prevSong();
       }
       _this.render();
+      _this.scrollIntoView();
       audio.play();
     };
     randomBtn.onclick = function () {
@@ -189,6 +199,7 @@ const app = {
       _this.isRepeat = !_this.isRepeat;
       repeatBtn.classList.toggle("active", _this.isRepeat);
     };
+    //When audio ended
     audio.onended = function () {
       if (_this.isRepeat) {
         audio.play();
@@ -196,6 +207,35 @@ const app = {
         nextBtn.click();
       }
     };
+    // event listener on playlist
+    playlist.onclick = function (e) {
+      const songNode = e.target.closest(".song:not(.active)");
+      const loveBtn = e.target.closest(".btn-loved-list-icon");
+      if (songNode || e.target.closest(".option")) {
+        //When click  on songs
+        if (songNode) {
+          _this.currentIndex = Number(songNode.dataset.index);
+          _this.loadCurrentSong();
+          _this.render();
+          audio.play();
+        } else if (loveBtn) {
+          loveBtn.addEventListener("click", function () {
+            loveBtn.classList.toggle("active");
+            loveIcon.classList.toggle("active");
+            _this.pushToLovedList();
+          });
+        }
+      }
+    };
+    optionBtn.onclick = function () {
+      closeBtn.style.display = "inline-block";
+      optionBtn.style.display = "none";
+      optionBar.style.display = "inline-block";
+    };
+  },
+  pushToLovedList: function (e) {
+    this.lovedList.push(this);
+    console.log(this.lovedList);
   },
   loadCurrentSong: function () {
     title.innerHTML = this.currentSong.name;
@@ -217,6 +257,14 @@ const app = {
     }
     this.loadCurrentSong();
   },
+  scrollIntoView: function () {
+    setTimeout(() => {
+      $(".song.active").scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 300);
+  },
 
   randomSong: function () {
     let newIndex;
@@ -232,16 +280,16 @@ const app = {
     // }
     do {
       newIndex = Math.floor(Math.random() * this.songs.length);
+      listenedSongs.push(newIndex);
     } while (
-      newIndex === this.currentIndex ||
+      newIndex === this.currentIndex &&
       listenedSongs.includes(newIndex)
     );
-    listenedSongs.push(newIndex);
+    this.currentIndex = newIndex;
+    console.log(listenedSongs);
     if ((listenedSongs.length = this.songs.length)) {
       listenedSongs = [];
     }
-    this.currentIndex = newIndex;
-    console.log(listenedSongs);
 
     this.loadCurrentSong();
   },

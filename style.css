@@ -6,7 +6,7 @@
 }
 body {
   background-color: #181c14;
-  color: #ecdfcc;
+  color: #fff4b7;
 }
 html {
   box-sizing: border-box;
@@ -42,7 +42,6 @@ html {
   width: 100%;
   max-width: 480px;
   border-radius: 10px;
-  margin-top: 20px;
 }
 /*HEADER*/
 .nav-bar {
@@ -183,7 +182,9 @@ html {
   background-size: cover;
   margin: 0 8px;
 }
-
+.song .option {
+  cursor: pointer;
+}
 .song .body {
   flex: 1;
   padding: 0 16px;
@@ -194,8 +195,50 @@ html {
   opacity: 0.7;
 }
 
-.song.active .option,
 .song.active .author,
 .song.active .title {
-  color: #3c3d37;
+  color: #e8bcb9;
+}
+
+/*Loved List*/
+.option-container {
+  position: relative;
+}
+.btn-option {
+  cursor: pointer;
+}
+
+.option-bar > h4 {
+  text-align: center;
+  font-size: 1rem;
+}
+.option-bar {
+  display: none;
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  z-index: 999;
+  background-color: #3c3d37;
+  width: 15rem;
+  padding: 1rem;
+  opacity: 0.9;
+  border-radius: 10px;
+  transition: all 1.5s ease-in-out;
+}
+#loved-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#loved-list .body {
+  flex: 1;
+  font-size: 0.8rem;
+}
+#loved-list .btn-loved-list {
+  font-size: 1rem;
+}
+
+.btn-loved-list-icon.active {
+  font-size: 1.5rem;
+  color: darkorchid;
 }
